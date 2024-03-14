@@ -6,7 +6,11 @@ terraform {
     }
   }
 
-  backend "local" {
+  backend "azurerm" {
+    resource_group_name  = "rg-sandor"
+    storage_account_name = "sanhorvastg1113"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
   }
 
 }
