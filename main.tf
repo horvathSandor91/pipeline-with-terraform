@@ -9,6 +9,8 @@ provider "azurerm" {
 }
 
 
+
+
 resource "azurerm_resource_group" "rg-sanhorva" {
   name     = "rg-sanhorva"
   location = "West Europe"
