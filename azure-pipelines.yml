@@ -5,10 +5,10 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  bkstrgrg: 'rg-sanhorva'
-  bkstrg: 'storagesanyiy7w7hf'
+  bkstrgrg: 'rg-sandor'
+  bkstrg: 'sanhorvastg1113'
   bkcontainer: 'tfstate'
-  bkstrgkey: 'devpipeline.terraform.tfstate'
+  bkstrgkey: 'terraform.tfstate'
   
 stages:
   - stage: tfvalidate
