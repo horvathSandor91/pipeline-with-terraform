@@ -4,6 +4,12 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  bkstrgrg: 'rg-sanhorva'
+  bkstrg: 'storagesanyiy7w7hf'
+  bkcontainer: 'tfstate'
+  bkstrgkey: 'devpipeline.terraform.tfstate'
+  
 stages:
   - stage: tfvalidate
     jobs:
@@ -19,6 +25,11 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
+            backendServiceArm: 'ZEISSgroup-DI05-ASM-Learning'
+            backendAzureRmResourceGroupName: '$(bkstrgrg)'
+            backendAzureRmStorageAccountName: '$(bkstrg)'
+            backendAzureRmContainerName: '$(bkcontainer)'
+            backendAzureRmKey: '$(bkstrgkey)'
         
         - task: TerraformTaskV4@4
           displayName: validate
@@ -41,6 +52,11 @@ stages:
           inputs:
             provider: 'azurerm'
             command: 'init'
+            backendServiceArm: 'ZEISSgroup-DI05-ASM-Learning'
+            backendAzureRmResourceGroupName: '$(bkstrgrg)'
+            backendAzureRmStorageAccountName: '$(bkstrg)'
+            backendAzureRmContainerName: '$(bkcontainer)'
+            backendAzureRmKey: '$(bkstrgkey)'
 
         - task: TerraformTaskV4@4
           displayName: plan
