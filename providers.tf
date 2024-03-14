@@ -5,4 +5,8 @@ terraform {
       version = "3.95.0"
     }
   }
+
+  backend "local" {
+  }
+
 }
