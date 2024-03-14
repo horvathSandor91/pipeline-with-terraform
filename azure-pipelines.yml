@@ -1,0 +1,67 @@
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  bkstrgrg: 'rg-sanhorva'
+  bkstrg: 'storagesanyi'
+
+stages:
+  - stage: tfvalidate
+    jobs:
+      - job: validate
+        continueOnError: false
+        steps:
+        - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@1
+          displayName: tfinstall
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTaskV4@4
+          displayName: 'init'
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: 'ZEISSgroup-DI05-ASM-Learning'
+            backendAzureRmResourceGroupName: '$(bkstrgrg)'
+            backendAzureRmStorageAccountName: '$(bkstrg)'
+            
+        - task: TerraformTaskV4@4
+          displayName: validate
+          inputs:
+            provider: 'azurerm'
+            command: 'validate'
+
+  - stage: tfdeploy
+    condition: succeeded('tfvalidate')
+    dependsOn: tfvalidate
+    jobs:
+      - job: apply
+        steps:
+        - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@1
+          displayName: tfinstall
+          inputs:
+            terraformVersion: 'latest'
+        - task: TerraformTaskV4@4
+          displayName: 'init'
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            backendServiceArm: 'ZEISSgroup-DI05-ASM-Learning'
+            backendAzureRmResourceGroupName: '$(bkstrgrg)'
+            backendAzureRmStorageAccountName: '$(bkstrg)'        
+
+        - task: TerraformTaskV4@4
+          displayName: plan
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            environmentServiceNameAzureRM: 'ZEISSgroup-DI05-ASM-Learning'
+
+        - task: TerraformTaskV4@4
+          displayName: apply
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            environmentServiceNameAzureRM: 'ZEISSgroup-DI05-ASM-Learning'
