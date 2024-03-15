@@ -5,8 +5,8 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  bkstrgrg: 'rg-sandor'
-  bkstrg: 'sanhorvastg1113'
+  bkstrgrg: 'rg-sanhorva'
+  bkstrg: 'sasanhorva'
   bkcontainer: 'tfstate'
   bkstrgkey: 'terraform.tfstate'
   
