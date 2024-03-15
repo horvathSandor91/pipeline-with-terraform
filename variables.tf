@@ -16,3 +16,7 @@ variable "rg_name" {
 variable "address_space" {}
 variable "dns_servers" {}
 
+  variable "bkstrgrg" {}
+  variable "bkstrg" {}  
+  variable "bkcontainer" {}  
+  variable "bkstrgkey" {} 

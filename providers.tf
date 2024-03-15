@@ -7,10 +7,10 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg-sanhorva"
-    storage_account_name = "sasanhorva"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
+    resource_group_name  = var.bkstrgrg
+    storage_account_name = var.bkstrg
+    container_name       = var.bkcontainer
+    key                  = var.bkstrgkey
   }
 
 }

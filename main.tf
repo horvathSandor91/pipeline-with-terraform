@@ -1,4 +1,3 @@
-
 provider "azurerm" {
   features {
     key_vault {
@@ -8,6 +7,19 @@ provider "azurerm" {
   }
 }
 
+
+resource "azurerm_resource_group" "rg-sanhorva013" {
+  name     = "rg-sanhorva013"
+  location = "West Europe"
+}
+
+module "StorageAccount" {
+  source      = "./Modules/StorageAccount"
+  sa_name     = var.sa_name
+  rg_location = var.rg_location
+  rg_name     = var.rg_name
+
+}
 
 module "KeyVault" {
   source      = "./Modules/KeyVault"
