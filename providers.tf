@@ -7,8 +7,8 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "rg-sandor"
-    storage_account_name = "sanhorvastg1113"
+    resource_group_name  = "rg-sanhorva"
+    storage_account_name = "sasanhorva"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
