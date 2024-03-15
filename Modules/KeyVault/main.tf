@@ -2,8 +2,8 @@
 data "azurerm_client_config" "current" {}
 
 
-resource "azurerm_key_vault" "key_vault-sanhorva" {
-  name                        = "key-vault-sanhorva"
+resource "azurerm_key_vault" "key-v-sanhorva" {
+  name                        = "key-v-sanhorva"
   location                    = var.rg_location
   resource_group_name         = var.rg_name
   enabled_for_disk_encryption = true
