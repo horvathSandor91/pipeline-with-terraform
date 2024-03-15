@@ -9,21 +9,6 @@ provider "azurerm" {
 }
 
 
-
-
-resource "azurerm_resource_group" "rg-sanhorva" {
-  name     = "rg-sanhorva"
-  location = "West Europe"
-}
-
-module "StorageAccount" {
-  source      = "./Modules/StorageAccount"
-  sa_name     = var.sa_name
-  rg_location = var.rg_location
-  rg_name     = var.rg_name
-
-}
-
 module "KeyVault" {
   source      = "./Modules/KeyVault"
   rg_location = var.rg_location
